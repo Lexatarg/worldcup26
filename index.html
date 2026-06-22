@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>World Cup 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f5f4;color:#1c1917;min-height:100vh;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+
+:root{
+  --bg:#f5f5f4;
+  --surface:#ffffff;
+  --surface-2:#f7f7f6;
+  --border:#e7e5e4;
+  --border-2:#d6d3d1;
+  --text:#1c1917;
+  --text-2:#78716c;
+  --text-3:#a8a29e;
+  --accent:#15803d;
+  --accent-light:#dcfce7;
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --red:#dc2626;
+  --red-bg:#fef2f2;
+  --amber:#d97706;
+  --amber-bg:#fffbeb;
+  --blue:#2563eb;
+  --blue-bg:#eff6ff;
+  --purple:#7c3aed;
+  --purple-bg:#f5f3ff;
+  --live:#dc2626;
+  --radius:8px;
+  --header-h:56px;
+  --tab-h:44px;
+  --max-w:700px;
+}
+
+.app{display:flex;flex-direction:column;min-height:100vh}
+.inner{max-width:var(--max-w);margin:0 auto;width:100%;padding:0 16px}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:50;height:var(--header-h);background:rgba(245,245,244,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.header .inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-name{font-size:15px;font-weight:700;letter-spacing:-0.02em;color:var(--text)}
+.brand-divider{width:1px;height:16px;background:var(--border-2)}
+.brand-sub{font-size:12px;color:var(--text-3);font-weight:500}
+.header-right{display:flex;align-items:center;gap:8px}
+
+/* live badge */
+.live-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--live);padding:3px 8px;border-radius:4px;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--live);animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* lang toggle */
+.lang-toggle{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:3px;gap:2px}
+.lang-btn{font-size:12px;font-weight:600;padding:3px 10px;border-radius:4px;color:var(--text-2);transition:background .15s,color .15s;letter-spacing:.02em}
+.lang-btn.active{background:var(--text);color:#fff}
+
+/* NAV TABS */
+.nav-tabs{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:var(--header-h);z-index:40}
+.nav-tabs .inner{display:flex;overflow-x:auto;scrollbar-width:none}
+.nav-tabs .inner::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;height:var(--tab-h);padding:0 16px;font-size:13px;font-weight:500;color:var(--text-3);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;display:flex;align-items:center}
+.nav-tab.active{color:var(--text);border-bottom-color:var(--text)}
+.nav-tab:hover:not(.active){color:var(--text-2)}
+
+/* PAGES */
+.page{display:none;padding:20px 0 80px}
+.page.active{display:block}
+
+/* SECTION EYEBROW */
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.eyebrow.mt{margin-top:24px}
+
+/* ALERT BANNER */
+.alert{background:var(--green-bg);border:1px solid rgba(22,163,74,.2);border-left:3px solid var(--green);border-radius:var(--radius);padding:12px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start}
+.alert-mark{font-size:13px;font-weight:700;color:var(--green);flex-shrink:0;margin-top:1px}
+.alert-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:2px}
+.alert-desc{font-size:13px;color:#166534}
+
+/* MATCH CARD */
+.match-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.match-card:hover{border-color:var(--border-2);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.match-card.is-final{opacity:.7}
+.match-card.is-live{border-color:rgba(220,38,38,.3);box-shadow:0 0 0 3px rgba(220,38,38,.06)}
+
+.match-trigger{width:100%;text-align:left;display:block;padding:14px 16px}
+.match-row1{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.match-time{font-size:12px;color:var(--text-3);font-weight:500}
+.match-time b{color:var(--green);font-weight:600}
+.match-time.live-time{color:var(--live);font-weight:600}
+
+.status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
+.pdot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+.match-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin-bottom:10px}
+.m-team{display:flex;align-items:center;gap:7px}
+.m-team.away{justify-content:flex-end}
+.m-flag{font-size:22px;line-height:1;flex-shrink:0}
+.m-name{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.m-score{font-size:20px;font-weight:800;letter-spacing:-.03em;color:var(--text);min-width:48px;text-align:center;font-variant-numeric:tabular-nums}
+.m-vs{font-size:11px;color:var(--text-3);font-weight:600;text-align:center}
+
+.match-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.match-summary{font-size:13px;color:var(--text-2);flex:1}
+.chev{width:18px;height:18px;flex-shrink:0;color:var(--text-3);display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.match-card.open .chev{transform:rotate(180deg)}
+
+/* MATCH DETAIL */
+.match-detail{display:none;border-top:1px solid var(--border);padding:14px 16px}
+.match-card.open .match-detail{display:block}
+
+.d-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.d-label.mt{margin-top:14px}
+
+/* prob bar */
+.prob-bar{display:flex;border-radius:5px;overflow:hidden;height:22px;margin-bottom:5px}
+.prob-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.9)}
+.prob-names{display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px}
+
+/* stake */
+.stake{border-radius:var(--radius);border:1px solid var(--border);border-left-width:3px;padding:11px 12px;margin-bottom:6px;background:var(--surface-2)}
+.stake-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:3px}
+.stake-name{font-size:13px;font-weight:700}
+.stake-need{font-size:11px;font-weight:700;letter-spacing:.04em;white-space:nowrap;margin-left:8px;flex-shrink:0}
+.stake-why{font-size:13px;color:var(--text-2);line-height:1.55}
+
+/* context */
+.ctx{background:var(--amber-bg);border:1px solid rgba(217,119,6,.15);border-radius:var(--radius);padding:11px 12px;margin-top:8px}
+.ctx-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);margin-bottom:3px}
+.ctx-text{font-size:13px;color:#92400e;line-height:1.55}
+
+/* mini standings */
+.mini-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:5px;font-size:13px;margin-bottom:2px}
+.mini-row.hl{background:var(--surface-2)}
+.mini-left{display:flex;align-items:center;gap:7px}
+.mini-pts{font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ── SCHEDULE TAB ── */
+.day-block{margin-bottom:8px}
+.day-trigger{width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;transition:border-color .15s;cursor:pointer}
+.day-block.open .day-trigger{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent}
+.day-trigger:hover{border-color:var(--border-2)}
+.day-left{display:flex;align-items:center;gap:10px}
+.day-date{font-size:14px;font-weight:700;color:var(--text)}
+.day-meta{font-size:12px;color:var(--text-3)}
+.day-badge{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.day-body{display:none;background:var(--surface);border:1px solid var(--border);border-top:none;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);padding:6px 0}
+.day-block.open .day-body{display:block}
+
+.sched-row{display:flex;align-items:center;padding:9px 16px;gap:10px;border-bottom:1px solid var(--border)}
+.sched-row:last-child{border-bottom:none}
+.sched-time{font-size:11px;color:var(--text-3);font-weight:500;width:90px;flex-shrink:0}
+.sched-teams{flex:1;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.sched-flag{font-size:16px;line-height:1}
+.sched-vs{font-size:11px;color:var(--text-3);font-weight:500}
+.sched-score{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text);min-width:40px;text-align:center}
+.sched-prob{font-size:11px;color:var(--text-3);min-width:60px;text-align:right;flex-shrink:0}
+.sched-live{font-size:10px;font-weight:700;color:var(--live);background:var(--red-bg);padding:1px 6px;border-radius:3px;letter-spacing:.05em}
+
+/* ── STANDINGS TAB ── */
+.group-block{margin-bottom:12px}
+.group-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3);padding:10px 16px 8px;background:var(--surface-2);border-bottom:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.group-label-text{}
+.standings-card{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+table.st{width:100%;border-collapse:collapse}
+table.st th{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);text-align:right;padding:7px 14px 7px 0;background:var(--surface);border-bottom:1px solid var(--border)}
+table.st th:first-child{text-align:left;padding-left:0}
+table.st td{font-size:13px;padding:9px 14px 9px 0;text-align:right;border-top:1px solid var(--border)}
+table.st tbody tr:first-child td{border-top:none}
+table.st td:first-child{padding-left:0}
+.tc{display:flex;align-items:center}
+.tc-rank{font-size:11px;color:var(--text-3);width:32px;text-align:center;flex-shrink:0}
+.tc-bar{width:3px;height:34px;flex-shrink:0}
+.tc-name{padding-left:8px;font-weight:500;white-space:nowrap}
+.tc-flag{margin-right:4px}
+tr.p1 .tc-bar{background:var(--green)}
+tr.p2 .tc-bar{background:var(--blue)}
+tr.p3 .tc-bar,tr.p4 .tc-bar{background:transparent}
+tr.p3 td,tr.p4 td{color:var(--text-2)}
+.td-pts{font-weight:700}
+tr.p1 .td-pts,tr.p2 .td-pts{color:var(--text)}
+tr.p3 .td-pts,tr.p4 .td-pts{color:var(--text-3)}
+.td-gd{color:var(--text-3)}
+
+/* standings legend */
+.st-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.st-leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-2)}
+.st-leg-bar{width:3px;height:14px;border-radius:1px;flex-shrink:0}
+
+/* ── WHO'S THROUGH TAB ── */
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.status-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.sc-label{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:10px}
+.sc-team{font-size:13px;font-weight:500;padding:4px 0;color:var(--text-2);display:flex;align-items:center;gap:7px}
+.sc-flag{font-size:17px;line-height:1;width:20px;flex-shrink:0}
+
+/* ── ABOUT TAB ── */
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:8px}
+.about-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.about-body{font-size:13px;color:var(--text-2);line-height:1.65}
+.about-body b{color:var(--text);font-weight:600}
+
+/* divider */
+.divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+
+/* footer */
+.footer{border-top:1px solid var(--border);padding:18px 0;text-align:center;font-size:12px;color:var(--text-3);background:var(--surface)}
+
+/* responsive */
+@media(max-width:480px){
+  :root{--max-w:100%}
+  .inner{padding:0 12px}
+  .m-name{font-size:13px}
+  .brand-sub,.brand-divider{display:none}
+  .status-grid{grid-template-columns:1fr}
+  .sched-prob{display:none}
+}
+@media(max-width:360px){.m-name{font-size:12px}.m-flag{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<script>
+/* ═══════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════ */
+const FLAGS={ARG:"🇦🇷",AUT:"🇦🇹",FRA:"🇫🇷",IRQ:"🇮🇶",NOR:"🇳🇴",SEN:"🇸🇳",JOR:"🇯🇴",DZA:"🇩🇿",
+  MEX:"🇲🇽",KOR:"🇰🇷",CZE:"🇨🇿",RSA:"🇿🇦",CAN:"🇨🇦",SUI:"🇨🇭",BIH:"🇧🇦",QAT:"🇶🇦",
+  BRA:"🇧🇷",MAR:"🇲🇦",SCO:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",HTI:"🇭🇹",USA:"🇺🇸",AUS:"🇦🇺",PAR:"🇵🇾",TUR:"🇹🇷",
+  GER:"🇩🇪",CIV:"🇨🇮",ECU:"🇪🇨",CUW:"🇨🇼",NED:"🇳🇱",JPN:"🇯🇵",SWE:"🇸🇪",TUN:"🇹🇳",
+  EGY:"🇪🇬",IRN:"🇮🇷",BEL:"🇧🇪",NZL:"🇳🇿",ESP:"🇪🇸",URU:"🇺🇾",CPV:"🇨🇻",KSA:"🇸🇦",
+  COL:"🇨🇴",COD:"🇨🇩",POR:"🇵🇹",UZB:"🇺🇿",ENG:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",GHA:"🇬🇭",PAN:"🇵🇦",CRO:"🇭🇷"};
+
+const SCHEDULE=[
+  {date:"Fri Jun 20",date_es:"Vie 20 Jun",status:"past",matches:[
+    {home:"TUR",away:"PAR",score:"0–1",time:"11:00 PM",status:"final"},
+  ]},
+  {date:"Sat Jun 20",date_es:"Sáb 20 Jun",status:"past",matches:[
+    {home:"NED",away:"SWE",score:"5–1",time:"1:00 PM",status:"final"},
+    {home:"GER",away:"CIV",score:"2–1",time:"4:00 PM",status:"final"},
+    {home:"ECU",away:"CUW",score:"0–0",time:"8:00 PM",status:"final"},
+  ]},
+  {date:"Sun Jun 21",date_es:"Dom 21 Jun",status:"past",matches:[
+    {home:"TUN",away:"JPN",score:"0–4",time:"12:00 AM",status:"final"},
+    {home:"ESP",away:"KSA",score:"4–0",time:"12:00 PM",status:"final"},
+    {home:"BEL",away:"IRN",score:"0–0",time:"3:00 PM",status:"final"},
+    {home:"URU",away:"CPV",score:"2–2",time:"6:00 PM",status:"final"},
+    {home:"NZL",away:"EGY",score:"1–3",time:"9:00 PM",status:"final"},
+  ]},
+  {date:"Mon Jun 22",date_es:"Lun 22 Jun",status:"today",matches:[
+    {home:"ARG",away:"AUT",score:"2–0",time:"1:00 PM",status:"final"},
+    {home:"FRA",away:"IRQ",score:"",time:"5:00 PM",status:"live",prob:{home:91.3,draw:6.3,away:2.4}},
+    {home:"NOR",away:"SEN",score:"",time:"8:00 PM",status:"upcoming",prob:{home:42,draw:27.9,away:30.1}},
+    {home:"JOR",away:"DZA",score:"",time:"11:00 PM",status:"upcoming",prob:{home:14.8,draw:21.9,away:63.3}},
+  ]},
+  {date:"Tue Jun 23",date_es:"Mar 23 Jun",status:"future",matches:[
+    {home:"POR",away:"UZB",score:"",time:"1:00 PM",status:"upcoming",prob:{home:81.9,draw:12.5,away:5.6}},
+    {home:"ENG",away:"GHA",score:"",time:"4:00 PM",status:"upcoming",prob:{home:80.5,draw:13.3,away:6.2}},
+    {home:"PAN",away:"CRO",score:"",time:"7:00 PM",status:"upcoming",prob:{home:14.4,draw:21.7,away:63.9}},
+    {home:"COL",away:"COD",score:"",time:"10:00 PM",status:"upcoming",prob:{home:61.7,draw:23.6,away:14.7}},
+  ]},
+  {date:"Wed Jun 24",date_es:"Mié 24 Jun",status:"future",matches:[
+    {home:"SUI",away:"CAN",score:"",time:"3:00 PM",status:"upcoming",prob:{home:39.1,draw:30.9,away:30}},
+    {home:"BIH",away:"QAT",score:"",time:"3:00 PM",status:"upcoming",prob:{home:67.1,draw:19.1,away:13.8}},
+    {home:"SCO",away:"BRA",score:"",time:"6:00 PM",status:"upcoming",prob:{home:11.5,draw:18.6,away:69.9}},
+    {home:"MAR",away:"HTI",score:"",time:"6:00 PM",status:"upcoming",prob:{home:82.8,draw:11.9,away:5.3}},
+  ]},
+];
+
+const ALL_GROUPS=[
+  {g:"A",teams:[
+    {r:1,f:"MEX",n:{en:"Mexico",es:"México"},p:2,w:2,d:0,l:0,gd:"+3",pts:6},
+    {r:2,f:"KOR",n:{en:"Korea Rep.",es:"Corea del Sur"},p:2,w:1,d:0,l:1,gd:"0",pts:3},
+    {r:3,f:"CZE",n:{en:"Czechia",es:"Chequia"},p:2,w:0,d:1,l:1,gd:"−1",pts:1},
+    {r:4,f:"RSA",n:{en:"South Africa",es:"Sudáfrica"},p:2,w:0,d:1,l:1,gd:"−2",pts:1},
+  ]},
+  {g:"B",teams:[
+    {r:1,f:"CAN",n:{en:"Canada",es:"Canadá"},p:2,w:1,d:1,l:0,gd:"+1",pts:4},
+    {r:2,f:"SUI",n:{en:"Switzerland",es:"Suiza"},p:2,w:1,d:1,l:0,gd:"+1",pts:4},
+    {r:3,f:"BIH",n:{en:"Bosnia & Herz.",es:"Bosnia y Herz."},p:2,w:0,d:1,l:1,gd:"−1",pts:1},
+    {r:4,f:"QAT",n:{en:"Qatar",es:"Catar"},p:2,w:0,d:1,l:1,gd:"−1",pts:1},
+  ]},
+  {g:"C",teams:[
+    {r:1,f:"BRA",n:{en:"Brazil",es:"Brasil"},p:2,w:1,d:1,l:0,gd:"+2",pts:4},
+    {r:2,f:"MAR",n:{en:"Morocco",es:"Marruecos"},p:2,w:1,d:1,l:0,gd:"+1",pts:4},
+    {r:3,f:"SCO",n:{en:"Scotland",es:"Escocia"},p:2,w:1,d:0,l:1,gd:"0",pts:3},
+    {r:4,f:"HTI",n:{en:"Haiti",es:"Haití"},p:2,w:0,d:0,l:2,gd:"−3",pts:0},
+  ]},
+  {g:"D",teams:[
+    {r:1,f:"USA",n:{en:"USA",es:"EE. UU."},p:2,w:2,d:0,l:0,gd:"+3",pts:6},
+    {r:2,f:"AUS",n:{en:"Australia",es:"Australia"},p:2,w:1,d:0,l:1,gd:"+1",pts:3},
+    {r:3,f:"PAR",n:{en:"Paraguay",es:"Paraguay"},p:2,w:1,d:0,l:1,gd:"0",pts:3},
+    {r:4,f:"TUR",n:{en:"Türkiye",es:"Turquía"},p:2,w:0,d:0,l:2,gd:"−4",pts:0},
+  ]},
+  {g:"E",teams:[
+    {r:1,f:"GER",n:{en:"Germany",es:"Alemania"},p:2,w:2,d:0,l:0,gd:"+3",pts:6},
+    {r:2,f:"CIV",n:{en:"Ivory Coast",es:"Costa de Marfil"},p:2,w:1,d:0,l:1,gd:"0",pts:3},
+    {r:3,f:"ECU",n:{en:"Ecuador",es:"Ecuador"},p:2,w:0,d:1,l:1,gd:"−1",pts:1},
+    {r:4,f:"CUW",n:{en:"Curaçao",es:"Curazao"},p:2,w:0,d:1,l:1,gd:"−2",pts:1},
+  ]},
+  {g:"F",teams:[
+    {r:1,f:"NED",n:{en:"Netherlands",es:"Países Bajos"},p:2,w:1,d:1,l:0,gd:"+4",pts:4},
+    {r:2,f:"JPN",n:{en:"Japan",es:"Japón"},p:2,w:1,d:1,l:0,gd:"+3",pts:4},
+    {r:3,f:"SWE",n:{en:"Sweden",es:"Suecia"},p:2,w:1,d:0,l:1,gd:"−2",pts:3},
+    {r:4,f:"TUN",n:{en:"Tunisia",es:"Túnez"},p:2,w:0,d:0,l:2,gd:"−5",pts:0},
+  ]},
+  {g:"G",teams:[
+    {r:1,f:"EGY",n:{en:"Egypt",es:"Egipto"},p:2,w:1,d:1,l:0,gd:"+2",pts:4},
+    {r:2,f:"IRN",n:{en:"IR Iran",es:"Irán"},p:2,w:0,d:2,l:0,gd:"0",pts:2},
+    {r:3,f:"BEL",n:{en:"Belgium",es:"Bélgica"},p:2,w:0,d:2,l:0,gd:"0",pts:2},
+    {r:4,f:"NZL",n:{en:"New Zealand",es:"Nueva Zelanda"},p:2,w:0,d:1,l:1,gd:"−2",pts:1},
+  ]},
+  {g:"H",teams:[
+    {r:1,f:"ESP",n:{en:"Spain",es:"España"},p:2,w:1,d:1,l:0,gd:"+4",pts:4},
+    {r:2,f:"URU",n:{en:"Uruguay",es:"Uruguay"},p:2,w:0,d:2,l:0,gd:"0",pts:2},
+    {r:3,f:"CPV",n:{en:"Cape Verde",es:"Cabo Verde"},p:2,w:0,d:2,l:0,gd:"0",pts:2},
+    {r:4,f:"KSA",n:{en:"Saudi Arabia",es:"Arabia Saudita"},p:2,w:0,d:1,l:1,gd:"−4",pts:1},
+  ]},
+  {g:"I",teams:[
+    {r:1,f:"FRA",n:{en:"France",es:"Francia"},p:2,w:1,d:1,l:0,gd:"+3",pts:4},
+    {r:2,f:"NOR",n:{en:"Norway",es:"Noruega"},p:1,w:1,d:0,l:0,gd:"+1",pts:3},
+    {r:3,f:"IRQ",n:{en:"Iraq",es:"Irak"},p:2,w:0,d:1,l:1,gd:"−2",pts:1},
+    {r:4,f:"SEN",n:{en:"Senegal",es:"Senegal"},p:1,w:0,d:0,l:1,gd:"−2",pts:0},
+  ]},
+  {g:"J",teams:[
+    {r:1,f:"ARG",n:{en:"Argentina",es:"Argentina"},p:2,w:2,d:0,l:0,gd:"+4",pts:6},
+    {r:2,f:"AUT",n:{en:"Austria",es:"Austria"},p:2,w:1,d:0,l:1,gd:"−2",pts:3},
+    {r:3,f:"JOR",n:{en:"Jordan",es:"Jordania"},p:1,w:0,d:0,l:1,gd:"−1",pts:0},
+    {r:4,f:"DZA",n:{en:"Algeria",es:"Argelia"},p:1,w:0,d:0,l:1,gd:"−1",pts:0},
+  ]},
+  {g:"K",teams:[
+    {r:1,f:"COL",n:{en:"Colombia",es:"Colombia"},p:1,w:1,d:0,l:0,gd:"+2",pts:3},
+    {r:2,f:"COD",n:{en:"Congo DR",es:"Congo RD"},p:1,w:0,d:1,l:0,gd:"0",pts:1},
+    {r:3,f:"POR",n:{en:"Portugal",es:"Portugal"},p:1,w:0,d:1,l:0,gd:"0",pts:1},
+    {r:4,f:"UZB",n:{en:"Uzbekistan",es:"Uzbekistán"},p:1,w:0,d:0,l:1,gd:"−2",pts:0},
+  ]},
+  {g:"L",teams:[
+    {r:1,f:"ENG",n:{en:"England",es:"Inglaterra"},p:1,w:1,d:0,l:0,gd:"+2",pts:3},
+    {r:2,f:"GHA",n:{en:"Ghana",es:"Ghana"},p:1,w:1,d:0,l:0,gd:"+1",pts:3},
+    {r:3,f:"PAN",n:{en:"Panama",es:"Panamá"},p:1,w:0,d:0,l:1,gd:"−1",pts:0},
+    {r:4,f:"CRO",n:{en:"Croatia",es:"Croacia"},p:1,w:0,d:0,l:1,gd:"−2",pts:0},
+  ]},
+];
+
+const MATCHES_TODAY=[
+  {id:1,time:{en:"1:00 PM EDT",es:"1:00 PM EDT"},group:"J",final:true,result:"ARG 2–0 AUT",
+   home:{n:"Argentina",f:"ARG"},away:{n:"Austria",f:"AUT"},pill:"final",
+   summary:{en:"Argentina through. Austria hold 2nd — for now.",es:"Argentina clasifica. Austria retiene el 2.° puesto, por ahora."},
+   stakes:[
+     {n:"Argentina",f:"ARG",col:"#16a34a",need:{en:"Qualified",es:"Clasificada"},why:{en:"6 points from 2 games — top of Group J and officially through to the Round of 32.",es:"6 puntos en 2 partidos — líderes del Grupo J y clasificados para los dieciseisavos."}},
+     {n:"Austria",f:"AUT",col:"#d97706",need:{en:"Hold 2nd place",es:"Mantener el 2.° puesto"},why:{en:"Still in 2nd on 3 pts, but Jordan or Algeria could draw level tonight. Austria want the late game to end in a draw.",es:"Aún en 2.° con 3 pts, pero Jordania o Argelia pueden igualarles. Austria prefieren que el partido tarde acabe en empate."}},
+   ],
+   ctx:{en:"Argentina are done. 2nd place in Group J is wide open — it'll be decided by tonight's Jordan vs Algeria result and Matchday 3.",es:"Argentina ya tiene el billete. El 2.° puesto del Grupo J está abierto — se decidirá con el resultado de Jordania-Argelia y la jornada 3."},
+   mini:[{f:"🇦🇷",n:"Argentina",pts:6,col:"#16a34a",hl:false},{f:"🇦🇹",n:"Austria",pts:3,col:"#d97706",hl:true},{f:"🇯🇴",n:"Jordan",pts:0,col:"#a8a29e",hl:true},{f:"🇩🇿",n:"Algeria",pts:0,col:"#a8a29e",hl:true}]},
+
+  {id:2,time:{en:"5:00 PM EDT",es:"5:00 PM EDT"},group:"I",final:false,live:true,
+   home:{n:"France",f:"FRA"},away:{n:"Iraq",f:"IRQ"},pill:"live",prob:{home:91.3,draw:6.3,away:2.4},
+   summary:{en:"Iraq must win or they're eliminated tonight.",es:"Iraq debe ganar o queda eliminado esta noche."},
+   stakes:[
+     {n:"France",f:"FRA",col:"#2563eb",need:{en:"Win — and score goals",es:"Ganar — y marcar goles"},why:{en:"Level with Norway on points (now 4 after FRA wins). Goals matter — goal difference could separate them from Norway in MD3.",es:"Igualados con Noruega en puntos. Los goles importan — la diferencia podría decidir frente a Noruega en la jornada 3."}},
+     {n:"Iraq",f:"IRQ",col:"#dc2626",need:{en:"Win — nothing else works",es:"Ganar — no hay otra opción"},why:{en:"Zero points going in, one game left after this. Anything less than a win means elimination tonight. France are 91% favorites.",es:"Cero puntos, un partido más tras este. Cualquier resultado que no sea una victoria les elimina. Francia tiene un 91% de probabilidad de ganar."}},
+   ],
+   ctx:{en:"France are heavy favorites. The real question is the margin — goals scored here could be insurance against Norway in MD3.",es:"Francia parte como gran favorita. La clave es el margen — los goles de hoy pueden ser un seguro frente a Noruega en la jornada 3."},
+   mini:[{f:"🇫🇷",n:"France",pts:4,col:"#16a34a",hl:true},{f:"🇳🇴",n:"Norway",pts:3,col:"#d97706",hl:false},{f:"🇮🇶",n:"Iraq",pts:1,col:"#a8a29e",hl:true},{f:"🇸🇳",n:"Senegal",pts:0,col:"#a8a29e",hl:false}]},
+
+  {id:3,time:{en:"8:00 PM EDT",es:"8:00 PM EDT"},group:"I",final:false,
+   home:{n:"Norway",f:"NOR"},away:{n:"Senegal",f:"SEN"},pill:"elim",prob:{home:42,draw:27.9,away:30.1},
+   summary:{en:"Senegal lose tonight = Senegal go home.",es:"Si Senegal pierde esta noche, se va a casa."},
+   stakes:[
+     {n:"Norway",f:"NOR",col:"#2563eb",need:{en:"Anything but a loss",es:"Cualquier resultado menos perder"},why:{en:"Already on 3 pts. A draw keeps them safely in the top 2. A win and they're almost certainly through. They can play it safe.",es:"Ya tienen 3 pts. Un empate les mantiene seguros en el top 2. Una victoria y prácticamente clasificados. Pueden ser conservadores."}},
+     {n:"Senegal",f:"SEN",col:"#dc2626",need:{en:"Win — and win big",es:"Ganar — y hacerlo de goleada"},why:{en:"Zero points. Must win to stay alive. Goal difference could matter if they end up level on points in MD3 — this is a must-win AND a score-as-many-as-you-can game.",es:"Cero puntos. Deben ganar para sobrevivir. La diferencia de goles importará si hay empate a puntos en la jornada 3 — hay que ganar Y marcar el máximo posible."}},
+   ],
+   ctx:{en:"The most open match of the day — Norway are only 42% favorites. If both France and Senegal win today, Group I sets up a thrilling final round.",es:"El partido más abierto del día — Noruega solo tiene un 42%. Si Francia y Senegal ganan, el Grupo I tendrá una jornada final emocionante."},
+   mini:[{f:"🇳🇴",n:"Norway",pts:3,col:"#d97706",hl:true},{f:"🇫🇷",n:"France",pts:4,col:"#16a34a",hl:false},{f:"🇸🇳",n:"Senegal",pts:0,col:"#a8a29e",hl:true},{f:"🇮🇶",n:"Iraq",pts:1,col:"#a8a29e",hl:false}]},
+
+  {id:4,time:{en:"11:00 PM EDT",es:"11:00 PM EDT"},group:"J",final:false,
+   home:{n:"Jordan",f:"JOR"},away:{n:"Algeria",f:"DZA"},pill:"sudden",prob:{home:14.8,draw:21.9,away:63.3},
+   summary:{en:"The loser goes home tonight. The winner still needs help.",es:"El perdedor se va a casa. Al ganador le hacen falta más resultados."},
+   stakes:[
+     {n:"Jordan",f:"JOR",col:"#d97706",need:{en:"Win — huge underdog",es:"Ganar — gran sorpresa"},why:{en:"Only a 15% chance. Must win to stay alive, then need Austria to drop points in MD3. Nothing to lose.",es:"Solo un 15% de probabilidades. Deben ganar y además necesitan que Austria falle en la jornada 3. No tienen nada que perder."}},
+     {n:"Algeria",f:"DZA",col:"#16a34a",need:{en:"Win — strong favorites",es:"Ganar — grandes favoritos"},why:{en:"63% to win. A victory puts them on 3 pts and into a real battle for 2nd place with Austria in MD3. A draw keeps both alive but hands Austria a big advantage.",es:"63% de probabilidad. Una victoria les da 3 pts y opciones reales ante Austria en la jornada 3. Un empate mantiene a ambos vivos pero favorece a Austria."}},
+   ],
+   ctx:{en:"Argentina are already through. 2nd place in Group J is the prize — Austria hold it on 3 pts, but a win for either team tonight pulls them level.",es:"Argentina ya está clasificada. El 2.° puesto del Grupo J es el premio — Austria lo ocupa con 3 pts, pero una victoria de cualquiera igualaría."},
+   mini:[{f:"🇦🇷",n:"Argentina",pts:6,col:"#16a34a",hl:false},{f:"🇦🇹",n:"Austria",pts:3,col:"#d97706",hl:false},{f:"🇯🇴",n:"Jordan",pts:0,col:"#a8a29e",hl:true},{f:"🇩🇿",n:"Algeria",pts:0,col:"#a8a29e",hl:true}]},
+];
+
+const PILL={
+  final:  {bg:"#f0fdf4",border:"rgba(22,163,74,.2)", text:"#15803d"},
+  live:   {bg:"#fef2f2",border:"rgba(220,38,38,.25)",text:"#dc2626"},
+  must_win:{bg:"#fef2f2",border:"rgba(220,38,38,.2)",text:"#dc2626"},
+  elim:   {bg:"#fef2f2",border:"rgba(220,38,38,.2)",text:"#dc2626"},
+  sudden: {bg:"#fef2f2",border:"rgba(220,38,38,.2)",text:"#b91c1c"},
+  upcoming:{bg:"#f0f9ff",border:"rgba(37,99,235,.15)",text:"#1d4ed8"},
+};
+
+const T={
+  en:{
+    brand:"WC 2026",updated:"Updated Jun 22 · 8:45 PM EDT",
+    tabs:["Today","Schedule","Standings","Who's Through","About"],
+    today_eyebrow:"Monday, June 22 — Groups I & J",
+    alert_title:"Argentina advance",alert_desc:"Argentina 2–0 Austria · Final · 3 matches still to play today.",
+    pill_final:"Final",pill_live:"Live Now",pill_must:"Must Win",pill_elim:"Elimination",pill_sudden:"Sudden Death",pill_upcoming:"Upcoming",
+    needs:"What each team needs",means:"What this means",picture:"Bigger picture",group_st:"Group standings",win_prob:"Win probability",draw:"Draw",
+    st_eyebrow:"All groups · After Matchday 2 · Top 2 per group advance",
+    leg1:"Strong position",leg2:"In contention",leg3:"Danger zone",
+    group:"Group",gp:"P",gw:"W",gd2:"D",gl:"L",ggd:"GD",gpts:"Pts",
+    through:"Qualified for Round of 32",elim_label:"Eliminated",alive:"Still in contention",
+    sched_eyebrow:"All match dates — EDT times",past:"Past",today_badge:"Today",upcoming_badge:"Upcoming",
+    about_title:"About this page",
+    about_q1:"What is this?",about_a1:"A daily guide to the 2026 FIFA World Cup — what's at stake each day, how the groups stand, and who's through. Written for everyone, not just football fans.",
+    about_q2:"The format",about_a2:"48 teams are split into 12 groups of 4. The top 2 from each group advance to the Round of 32, then it's straight knockout football all the way to the final on <b>July 19, 2026</b>.",
+    about_q3:"Win probabilities",about_a3:"The percentages shown on match cards come from real sports data models — they reflect historical form, squad strength, and head-to-head records. They're a useful guide to who's favored going in, not a guarantee. Football always surprises.",
+    about_q4:"Goal difference",about_a4:"When two teams finish level on points in a group, <b>goal difference</b> (goals scored minus goals conceded across all group games) is the first tiebreaker. That's why you'll sometimes see a team chasing extra goals even when the result is already settled.",
+    about_q5:"How often is it updated?",about_a5:"Manually updated each matchday — usually once before games start and again after results come in. Check the timestamp in the header to see how fresh the info is.",
+  },
+  es:{
+    brand:"WC 2026",updated:"Actualizado 22 Jun · 8:45 PM EDT",
+    tabs:["Hoy","Calendario","Clasificación","Quién clasificó","Acerca de"],
+    today_eyebrow:"Lunes, 22 de junio — Grupos I & J",
+    alert_title:"Argentina clasifica",alert_desc:"Argentina 2–0 Austria · Final · Quedan 3 partidos hoy.",
+    pill_final:"Final",pill_live:"En Directo",pill_must:"Ganar o quedar fuera",pill_elim:"Eliminación",pill_sudden:"Muerte Súbita",pill_upcoming:"Próximo",
+    needs:"Lo que necesita cada equipo",means:"Qué significa este resultado",picture:"El panorama general",group_st:"Clasificación del grupo",win_prob:"Probabilidad de victoria",draw:"Empate",
+    st_eyebrow:"Todos los grupos · Tras la jornada 2 · Los 2 primeros avanzan",
+    leg1:"Posición sólida",leg2:"En liza",leg3:"Zona de peligro",
+    group:"Grupo",gp:"J",gw:"G",gd2:"E",gl:"P",ggd:"DG",gpts:"Pts",
+    through:"Clasificados para los dieciseisavos",elim_label:"Eliminados",alive:"Aún con opciones",
+    sched_eyebrow:"Todas las fechas — hora EDT",past:"Pasado",today_badge:"Hoy",upcoming_badge:"Próximo",
+    about_title:"Acerca de esta página",
+    about_q1:"¿Qué es esto?",about_a1:"Una guía diaria del Mundial 2026 — qué se juega cada día, cómo van los grupos y quién ha clasificado. Pensada para todos, no solo para aficionados al fútbol.",
+    about_q2:"El formato",about_a2:"48 equipos se dividen en 12 grupos de 4. Los 2 primeros de cada grupo avanzan a los dieciseisavos de final, y a partir de ahí es eliminación directa hasta la final el <b>19 de julio de 2026</b>.",
+    about_q3:"Probabilidades de victoria",about_a3:"Los porcentajes mostrados provienen de modelos de datos deportivos reales — reflejan el historial, la calidad de los equipos y los precedentes directos. Son una orientación, no una garantía. El fútbol siempre sorprende.",
+    about_q4:"Diferencia de goles",about_a4:"Cuando dos equipos quedan igualados en puntos en un grupo, la <b>diferencia de goles</b> (goles marcados menos goles encajados en todos los partidos del grupo) es el primer desempate. Por eso a veces verás a un equipo buscando más goles aunque el resultado ya esté decidido.",
+    about_q5:"¿Con qué frecuencia se actualiza?",about_a5:"Se actualiza manualmente cada jornada — normalmente antes de los partidos y tras conocerse los resultados. Comprueba la fecha en la cabecera.",
+  }
+};
+
+let lang="en";
+let openCards=new Set();
+let openDays=new Set(["Mon Jun 22"]);
+
+function t(k){return T[lang][k]||k}
+function flag(abbr){return FLAGS[abbr]||""}
+
+function pillHTML(type){
+  const c=PILL[type]||PILL.upcoming;
+  const labels={final:"pill_final",live:"pill_live",must_win:"pill_must",elim:"pill_elim",sudden:"pill_sudden",upcoming:"pill_upcoming"};
+  const isLive=type==="live";
+  return `<span class="status-pill" style="background:${c.bg};border:1px solid ${c.border};color:${c.text}">
+    <span class="pdot" style="background:${c.text};${isLive?"animation:blink 1.4s infinite":""}"></span>${t(labels[type]||"pill_upcoming")}</span>`;
+}
+
+function probBarHTML(prob,homeName,awayName){
+  if(!prob)return"";
+  const{home,draw,away}=prob;
+  return`<div class="d-label">${t("win_prob")}</div>
+  <div class="prob-bar">
+    <div class="prob-seg" style="width:${home}%;background:#2563eb">${home>14?Math.round(home)+"%":""}</div>
+    <div class="prob-seg" style="width:${draw}%;background:#a8a29e">${draw>10?Math.round(draw)+"%":""}</div>
+    <div class="prob-seg" style="width:${away}%;background:#7c3aed">${away>14?Math.round(away)+"%":""}</div>
+  </div>
+  <div class="prob-names">
+    <span style="color:#2563eb;font-weight:600">${homeName}</span>
+    <span style="color:#a8a29e">${t("draw")}</span>
+    <span style="color:#7c3aed;font-weight:600">${awayName}</span>
+  </div>`;
+}
+
+function matchCardHTML(m){
+  const isOpen=openCards.has(m.id);
+  const stakeTitle=m.final?t("means"):t("needs");
+  const stakesHTML=m.stakes.map(s=>`
+    <div class="stake" style="border-left-color:${s.col}">
+      <div class="stake-head">
+        <span class="stake-name">${flag(s.f)} ${s.n}</span>
+        <span class="stake-need" style="color:${s.col}">${s.need[lang]}</span>
+      </div>
+      <p class="stake-why">${s.why[lang]}</p>
+    </div>`).join("");
+  const miniHTML=m.mini.map(r=>`
+    <div class="mini-row${r.hl?" hl":""}">
+      <div class="mini-left">${r.f} ${r.n}</div>
+      <span class="mini-pts" style="color:${r.col}">${r.pts} pts</span>
+    </div>`).join("");
+  const timeStr=m.final?`${m.time[lang]} <b>· ${m.result} · ${t("pill_final")}</b>`
+    :m.live?`<span class="live-time">${m.time[lang]}</span>`:m.time[lang];
+
+  return`<div class="match-card${m.final?" is-final":""}${m.live?" is-live":""}${isOpen?" open":""}" id="card-${m.id}">
+    <button class="match-trigger" onclick="toggleCard(${m.id})" aria-expanded="${isOpen}">
+      <div class="match-row1">
+        <span class="match-time">${timeStr}</span>
+        ${pillHTML(m.live?"live":m.pill)}
+      </div>
+      <div class="match-teams">
+        <div class="m-team"><div class="m-flag">${flag(m.home.f)}</div><span class="m-name">${m.home.n}</span></div>
+        ${m.final?`<span class="m-score">${m.result.split(" ")[1]}</span>`:`<span class="m-vs">vs</span>`}
+        <div class="m-team away"><span class="m-name">${m.away.n}</span><div class="m-flag">${flag(m.away.f)}</div></div>
+      </div>
+      <div class="match-footer">
+        <span class="match-summary">${m.summary[lang]}</span>
+        <span class="chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </button>
+    <div class="match-detail">
+      ${probBarHTML(m.prob,m.home.n,m.away.n)}
+      <div class="d-label${m.prob?" mt":""}">${stakeTitle}</div>
+      ${stakesHTML}
+      <div class="ctx"><div class="ctx-label">${t("picture")}</div><p class="ctx-text">${m.ctx[lang]}</p></div>
+      <div class="d-label mt">${t("group_st")} — ${t("group")} ${m.group}</div>
+      ${miniHTML}
+    </div>
+  </div>`;
+}
+
+function scheduleHTML(){
+  return SCHEDULE.map(day=>{
+    const isOpen=openDays.has(day.date);
+    const isToday=day.status==="today";
+    const isPast=day.status==="past";
+    const badgeStyle=isToday
+      ?`background:#f0fdf4;border:1px solid rgba(22,163,74,.2);color:#15803d`
+      :isPast?`background:#f5f5f4;border:1px solid var(--border);color:var(--text-3)`
+      :`background:#eff6ff;border:1px solid rgba(37,99,235,.15);color:#1d4ed8`;
+    const badgeText=isToday?t("today_badge"):isPast?t("past"):t("upcoming_badge");
+    const dateStr=lang==="es"?day.date_es:day.date;
+    const matchCount=day.matches.length;
+    const matchWord=lang==="es"?`${matchCount} partido${matchCount>1?"s":""}`:`${matchCount} match${matchCount>1?"es":""}`;
+    const rows=day.matches.map(m=>{
+      const hf=flag(m.home);const af=flag(m.away);
+      const hn=m.home;const an=m.away;
+      let right="";
+      if(m.status==="final")right=`<span class="sched-score">${m.score}</span>`;
+      else if(m.status==="live")right=`<span class="sched-live">${t("pill_live")}</span>`;
+      else if(m.prob){
+        const fav=m.prob.home>m.prob.away?`${hf} ${Math.round(m.prob.home)}%`:`${af} ${Math.round(m.prob.away)}%`;
+        right=`<span class="sched-prob">${fav}</span>`;
+      }
+      return`<div class="sched-row">
+        <span class="sched-time">${m.time}</span>
+        <div class="sched-teams"><span class="sched-flag">${hf}</span>${hn}<span class="sched-vs">vs</span><span class="sched-flag">${af}</span>${an}</div>
+        ${right}
+      </div>`;
+    }).join("");
+    return`<div class="day-block${isOpen?" open":""}">
+      <button class="day-trigger" onclick="toggleDay('${day.date}')">
+        <div class="day-left">
+          <span class="day-date">${dateStr}</span>
+          <span class="day-meta">${matchWord}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="day-badge" style="${badgeStyle}">${badgeText}</span>
+          <span class="chev" style="color:var(--text-3)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </button>
+      <div class="day-body">${rows}</div>
+    </div>`;
+  }).join("");
+}
+
+function standingsHTML(){
+  return ALL_GROUPS.map(grp=>{
+    const rows=grp.teams.map(t2=>`
+      <tr class="p${t2.r}">
+        <td><div class="tc"><span class="tc-rank">${t2.r}</span><span class="tc-bar"></span><span class="tc-name"><span class="tc-flag">${flag(t2.f)}</span>${t2.n[lang]}</span></div></td>
+        <td>${t2.p}</td><td>${t2.w}</td><td>${t2.d}</td><td>${t2.l}</td>
+        <td class="td-gd">${t2.gd}</td><td class="td-pts">${t2.pts}</td>
+      </tr>`).join("");
+    return`<div class="group-block">
+      <div class="group-label"><span class="group-label-text">${t("group")} ${grp.g}</span></div>
+      <div class="standings-card"><table class="st">
+        <thead><tr>
+          <th></th><th>${t("gp")}</th><th>${t("gw")}</th><th>${t("gd2")}</th><th>${t("gl")}</th><th>${t("ggd")}</th><th>${t("gpts")}</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>
+    </div>`;
+  }).join("");
+}
+
+function render(){
+  document.getElementById("brand-name").textContent=t("brand");
+  document.getElementById("brand-updated").textContent=t("updated");
+  document.querySelectorAll(".lang-btn").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));
+  const tabs=t("tabs");
+  document.querySelectorAll(".nav-tab").forEach((tab,i)=>{tab.textContent=tabs[i]});
+
+  // today
+  document.getElementById("today-eyebrow").textContent=t("today_eyebrow");
+  document.getElementById("alert-title").textContent=t("alert_title");
+  document.getElementById("alert-desc").textContent=t("alert_desc");
+  document.getElementById("matches-list").innerHTML=MATCHES_TODAY.map(matchCardHTML).join("");
+
+  // schedule
+  document.getElementById("sched-eyebrow").textContent=t("sched_eyebrow");
+  document.getElementById("schedule-list").innerHTML=scheduleHTML();
+
+  // standings
+  document.getElementById("st-eyebrow").textContent=t("st_eyebrow");
+  document.getElementById("leg1").textContent=t("leg1");
+  document.getElementById("leg2").textContent=t("leg2");
+  document.getElementById("leg3").textContent=t("leg3");
+  document.getElementById("standings-list").innerHTML=standingsHTML();
+
+  // status
+  document.getElementById("through-label").textContent=t("through");
+  document.getElementById("elim-label").textContent=t("elim_label");
+  document.getElementById("alive-label").textContent=t("alive");
+
+  // about
+  document.getElementById("about-title").textContent=t("about_title");
+  const qs=["q1","q2","q3","q4","q5"];
+  qs.forEach(q=>{
+    document.getElementById("ab-"+q).textContent=t("about_"+q);
+    document.getElementById("ab-a"+q.slice(1)).innerHTML=t("about_a"+q.slice(1));
+  });
+}
+
+function setLang(l){lang=l;document.documentElement.lang=l;render()}
+function toggleCard(id){
+  if(openCards.has(id))openCards.delete(id);else openCards.add(id);
+  const card=document.getElementById("card-"+id);
+  card.classList.toggle("open",openCards.has(id));
+  card.querySelector(".match-trigger").setAttribute("aria-expanded",openCards.has(id));
+}
+function toggleDay(date){
+  if(openDays.has(date))openDays.delete(date);else openDays.add(date);
+  render();
+}
+let activeTab="today";
+function showTab(name){
+  activeTab=name;
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("page-"+name).classList.add("active");
+  document.querySelector(`.nav-tab[data-tab="${name}"]`).classList.add("active");
+}
+window.addEventListener("DOMContentLoaded",render);
+</script>
+
+<div class="app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="inner">
+      <div class="brand">
+        <span class="brand-name" id="brand-name"></span>
+        <span class="brand-divider"></span>
+        <span class="brand-sub" id="brand-updated"></span>
+      </div>
+      <div class="header-right">
+        <div class="live-badge"><span class="live-dot"></span>Live</div>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav-tabs" aria-label="Navigation">
+    <div class="inner">
+      <button class="nav-tab active" data-tab="today" onclick="showTab('today')"></button>
+      <button class="nav-tab" data-tab="schedule" onclick="showTab('schedule')"></button>
+      <button class="nav-tab" data-tab="standings" onclick="showTab('standings')"></button>
+      <button class="nav-tab" data-tab="status" onclick="showTab('status')"></button>
+      <button class="nav-tab" data-tab="about" onclick="showTab('about')"></button>
+    </div>
+  </nav>
+
+  <!-- TODAY -->
+  <div id="page-today" class="page active">
+    <div class="inner">
+      <p class="eyebrow" id="today-eyebrow"></p>
+      <div class="alert">
+        <span class="alert-mark">→</span>
+        <div><div class="alert-title" id="alert-title"></div><div class="alert-desc" id="alert-desc"></div></div>
+      </div>
+      <div id="matches-list"></div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div id="page-schedule" class="page">
+    <div class="inner">
+      <p class="eyebrow" id="sched-eyebrow"></p>
+      <div id="schedule-list"></div>
+    </div>
+  </div>
+
+  <!-- STANDINGS -->
+  <div id="page-standings" class="page">
+    <div class="inner">
+      <p class="eyebrow" id="st-eyebrow"></p>
+      <div class="st-legend">
+        <div class="st-leg-item"><span class="st-leg-bar" style="background:#16a34a"></span><span id="leg1"></span></div>
+        <div class="st-leg-item"><span class="st-leg-bar" style="background:#2563eb"></span><span id="leg2"></span></div>
+        <div class="st-leg-item" style="opacity:.55"><span class="st-leg-bar" style="background:#a8a29e"></span><span id="leg3"></span></div>
+      </div>
+      <div id="standings-list"></div>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <div id="page-status" class="page">
+    <div class="inner">
+      <p class="eyebrow" id="through-label"></p>
+      <div class="status-grid">
+        <div class="status-card" style="border-color:rgba(22,163,74,.2)">
+          <div class="sc-label" style="color:#15803d">Qualified</div>
+          <div class="sc-team"><span class="sc-flag">🇲🇽</span>Mexico</div>
+          <div class="sc-team"><span class="sc-flag">🇩🇪</span>Germany</div>
+          <div class="sc-team"><span class="sc-flag">🇺🇸</span>USA</div>
+          <div class="sc-team"><span class="sc-flag">🇦🇷</span>Argentina</div>
+        </div>
+        <div class="status-card" style="border-color:rgba(220,38,38,.2)">
+          <div class="sc-label" style="color:#dc2626" id="elim-label"></div>
+          <div class="sc-team"><span class="sc-flag">🇹🇷</span>Türkiye</div>
+          <div class="sc-team"><span class="sc-flag">🇹🇳</span>Tunisia</div>
+          <div class="sc-team"><span class="sc-flag">🇸🇦</span>Saudi Arabia</div>
+        </div>
+      </div>
+      <p class="eyebrow mt" id="alive-label"></p>
+      <div class="status-card" style="margin-bottom:8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 12px">
+          <div class="sc-team"><span class="sc-flag">🇫🇷</span>France</div>
+          <div class="sc-team"><span class="sc-flag">🇳🇴</span>Norway</div>
+          <div class="sc-team"><span class="sc-flag">🇸🇳</span>Senegal</div>
+          <div class="sc-team"><span class="sc-flag">🇮🇶</span>Iraq</div>
+          <div class="sc-team"><span class="sc-flag">🇦🇹</span>Austria</div>
+          <div class="sc-team"><span class="sc-flag">🇩🇿</span>Algeria</div>
+          <div class="sc-team"><span class="sc-flag">🇯🇴</span>Jordan</div>
+          <div class="sc-team"><span class="sc-flag">🇬🇧</span>England</div>
+          <div class="sc-team"><span class="sc-flag">🇬🇭</span>Ghana</div>
+          <div class="sc-team"><span class="sc-flag">🇵🇹</span>Portugal</div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-3);text-align:center;margin-top:14px;line-height:1.6">48 teams · 32 advance to Round of 32 · Groups A–L in progress</p>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="page-about" class="page">
+    <div class="inner">
+      <p class="eyebrow" id="about-title"></p>
+      <div class="about-card"><div class="about-title" id="ab-q1"></div><p class="about-body" id="ab-a1"></p></div>
+      <div class="about-card"><div class="about-title" id="ab-q2"></div><p class="about-body" id="ab-a2"></p></div>
+      <div class="about-card"><div class="about-title" id="ab-q3"></div><p class="about-body" id="ab-a3"></p></div>
+      <div class="about-card"><div class="about-title" id="ab-q4"></div><p class="about-body" id="ab-a4"></p></div>
+      <div class="about-card"><div class="about-title" id="ab-q5"></div><p class="about-body" id="ab-a5"></p></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="inner">FIFA World Cup 2026 · Updated manually each matchday</div>
+  </footer>
+</div>
+</body>
+</html>
