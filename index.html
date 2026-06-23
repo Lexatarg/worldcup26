@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="description" content="">
-<meta name="theme-color" content="#f8f7f5" id="theme-meta">
+<meta name="theme-color" content="#f8f7f5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="WC 26 Guide">
@@ -36,6 +36,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   --bg-2:      #ffffff;
   --card:      #ffffff;
   --card-2:    #f5f5f3;
+  --muted:     #f5f5f4;
+  --muted-2:   #eeeeec;
   --border:    #e8e6e3;
   --border-2:  #d4d2cf;
   --fg:        #1a1917;
@@ -63,33 +65,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   --sh-sm: 0 1px 2px rgba(0,0,0,.05);
 }
 
-/* DARK MODE — toggled by .dark on <html> */
-html.dark{
-  --bg:        #0f1117;
-  --bg-2:      #161b27;
-  --card:      #1c2333;
-  --card-2:    #232d42;
-  --border:    rgba(255,255,255,.08);
-  --border-2:  rgba(255,255,255,.13);
-  --fg:        #f0f0ee;
-  --fg-2:      #9ea3b0;
-  --fg-3:      #5a6070;
-  --green:     #22c55e;
-  --green-s:   rgba(34,197,94,.1);
-  --green-b:   rgba(34,197,94,.22);
-  --red:       #f87171;
-  --red-s:     rgba(248,113,113,.1);
-  --red-b:     rgba(248,113,113,.22);
-  --amber:     #fbbf24;
-  --amber-s:   rgba(251,191,36,.08);
-  --amber-b:   rgba(251,191,36,.2);
-  --blue:      #60a5fa;
-  --blue-s:    rgba(96,165,250,.1);
-  --blue-b:    rgba(96,165,250,.2);
-  --rose:      #fb923c;
-  --sh:  0 4px 16px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.2);
-  --sh-sm: 0 2px 8px rgba(0,0,0,.25);
-}
+
 
 .app{display:flex;flex-direction:column;min-height:100vh}
 .w{max-width:var(--max);margin:0 auto;width:100%;padding:0 16px}
@@ -232,15 +208,24 @@ html.dark{
   color:var(--fg-3);margin-bottom:8px;
 }
 .dl.mt{margin-top:14px}
+.pb-w{margin-bottom:12px;margin-top:2px}
+.pr{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.pr:last-child{margin-bottom:0}
+.pr-n{font-size:13px;color:var(--fg-2);width:34%;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-fav{color:var(--fg);font-weight:600}
+.pr-track{flex:1;height:6px;background:var(--muted-2,#eeeeec);border-radius:3px;overflow:hidden}
+.pr-fill{display:block;height:100%;background:var(--fg-3);border-radius:3px}
+.pr-fill-fav{background:var(--fg)}
+.pr-pct{font-size:12px;color:var(--fg-3);width:38px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
 
 /* prob bar */
-.pb-w{margin-bottom:12px}
-.pb{display:flex;border-radius:5px;overflow:hidden;height:20px;margin-bottom:5px}
-.ps{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:rgba(255,255,255,.88)}
-.pn{display:flex;justify-content:space-between;font-size:11px}
-.ph{color:var(--fg);font-weight:600}
-.pd{color:var(--fg-3)}
-.pa{color:var(--fg-2);font-weight:600}
+
+
+
+
+
+
+
 
 /* stake rows — KEY FIX: flex-wrap so nothing overflows */
 .sk{
@@ -363,6 +348,18 @@ tr.p3 .td-pts,tr.p4 .td-pts{color:var(--fg-3)}
 /* ═══════════════════════
    BRACKET
 ═══════════════════════ */
+.status-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:18px;box-shadow:var(--sh-sm)}
+.status-section{margin-bottom:16px}
+.status-section:last-of-type{margin-bottom:8px}
+.status-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.status-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;background:var(--muted);border-radius:9px;font-size:10px;font-weight:600;color:var(--fg-2);letter-spacing:0}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 16px}
+.status-team{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px;color:var(--fg)}
+.status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.status-fl{font-size:16px;line-height:1;flex-shrink:0}
+.status-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--fg-2)}
+.status-note{font-size:12px;color:var(--fg-3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+@media(max-width:460px){.status-grid{grid-template-columns:1fr}}
 .bracket-stage{margin-bottom:24px}
 .bsl{
   font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
@@ -436,14 +433,7 @@ footer{
   text-align:center;font-size:12px;color:var(--fg-3);
   background:var(--bg-2);
 }
-.theme-btn{
-  width:28px;height:28px;border-radius:var(--r-sm);
-  display:flex;align-items:center;justify-content:center;
-  background:var(--card-2);border:1px solid var(--border);
-  color:var(--fg-3);font-size:14px;cursor:pointer;
-  transition:background .12s,color .12s;flex-shrink:0;
-}
-.theme-btn:hover{background:var(--border);color:var(--fg)}
+
 
 /* ── RESPONSIVE ── */
 @media(max-width:460px){
@@ -452,7 +442,6 @@ footer{
   .m-name{font-size:13px}
   .m-flag{font-size:19px}
   .m-score{font-size:17px;padding:5px 10px;min-width:66px}
-  .sr-tn{display:none}
   .bm-nm{display:none}
   .bm-fl{font-size:19px}
 }
@@ -575,7 +564,7 @@ const MATCHES=[
   sum:{en:"Argentina through. Austria still hold 2nd \u2014 but tonight changes that.",es:"Argentina pasa. Austria a\u00fan es 2.\u00b0 \u2014 pero esta noche puede cambiar eso."},
   stakes:[
    {f:"ARG",n:"Argentina",v:{en:"Qualified",es:"Clasificada"},vc:"var(--green)",
-    w:{en:"Six points from two games. They\u2019re through, full stop. Their Matchday 3 game has nothing riding on it.",es:"Seis puntos en dos partidos. Est\u00e1n clasificados sin vuelta de hoja. Su partido de la jornada 3 no tiene nada en juego."}},
+    w:{en:"Six points from two games means Argentina have qualified. Their final group match will not change that.",es:"Con seis puntos en dos partidos, Argentina ya est\u00e1 clasificada. Su \u00faltimo partido de grupo no cambiar\u00e1 eso."}},
    {f:"AUT",n:"Austria",v:{en:"Hold 2nd",es:"Mantener el 2.\u00b0"},vc:"var(--amber)",
     w:{en:"Three points, currently 2nd. The problem: Jordan and Algeria are both on zero and play each other tonight. If either wins, they pull level with Austria and 2nd place goes to the wire on Matchday 3.",es:"Tres puntos, actualmente 2.\u00b0. El problema: Jordania y Argelia tienen cero puntos y se enfrentan esta noche. Si una gana, iguala a Austria y el 2.\u00b0 se decide en la jornada 3."}},
   ],
@@ -605,7 +594,7 @@ const MATCHES=[
    {f:"SEN",n:"Senegal",v:{en:"Win \u2014 and score as many as possible",es:"Ganar \u2014 y marcar los m\u00e1ximos goles posibles"},vc:"var(--red)",
     w:{en:"Zero points from one game. Only a win keeps them alive. And because goal difference could split them and Norway in Matchday 3, the margin here matters too.",es:"Cero puntos en un partido. Solo una victoria les mantiene vivos. Y como la diferencia de goles podr\u00eda separarles de Noruega en la jornada 3, el margen de esta noche tambi\u00e9n importa."}},
   ],
-  ctx:{en:"France are through. This match settles whether Group I has a genuine final-round decider or a match with nothing to play for. Senegal win here and it\u2019s suddenly wide open.",es:"Francia est\u00e1 clasificada. Este partido define si el Grupo I tiene una \u00faltima jornada emocionante o un partido sin trascendencia. Senegal gana y de repente todo est\u00e1 abierto."},
+  ctx:{en:"France have already qualified. This match decides whether the final round of Group I still has second place to play for, or whether it is already settled.",es:"Francia ya est\u00e1 clasificada. Este partido decide si la \u00faltima jornada del Grupo I todav\u00eda tiene el segundo puesto en juego, o si ya est\u00e1 definido."},
   mini:[{f:"\u{1F1EB}\u{1F1F7}",n:"France",pts:6,pc:"var(--green)",hl:false},{f:"\u{1F1F3}\u{1F1F4}",n:"Norway",pts:3,pc:"var(--fg)",hl:true},{f:"\u{1F1F8}\u{1F1F3}",n:"Senegal",pts:0,pc:"var(--fg-3)",hl:true},{f:"\u{1F1EE}\u{1F1F6}",n:"Iraq",pts:0,pc:"var(--red)",hl:false}],
  },
  {id:4,grp:"J",pill:"sudden",done:false,
@@ -613,12 +602,12 @@ const MATCHES=[
   time:{en:"11:00 PM EDT",es:"11:00 PM EDT"},
   sum:{en:"A decisive match \u2014 the team that loses is eliminated.",es:"Un partido decisivo \u2014 el equipo que pierde queda eliminado."},
   stakes:[
-   {f:"JOR",n:"Jordan",v:{en:"Must win to stay in (15%)",es:"Debe ganar para seguir (15%)"},vc:"var(--amber)",
-    w:{en:"Zero points and a 15% chance of winning. Jordan need to win just to stay in the conversation, then need things to go their way in Matchday 3. They have nothing to lose, so expect them to go for it.",es:"Cero puntos y un 15% de probabilidad de ganar. Jordania necesita ganar solo para seguir con opciones, y luego que los resultados les acompa\u00f1en en la jornada 3. No tienen nada que perder."}},
-   {f:"DZA",n:"Algeria",v:{en:"Must win (63% chance)",es:"Obligada a ganar (63%)"},vc:"var(--green)",
-    w:{en:"Clear favorites at 63%. A win puts Algeria on 3 points and sets up a fight with Austria for 2nd place in Matchday 3. A draw technically keeps both alive but hands Austria a real advantage.",es:"Favorita clara con un 63%. Una victoria da 3 puntos a Argelia y prepara un duelo con Austria por el 2.\u00b0 en la jornada 3. Un empate mantiene a ambas vivas t\u00e9cnicamente, pero le da a Austria una ventaja real."}},
+   {f:"JOR",n:"Jordan",v:{en:"Must win to stay in",es:"Debe ganar para seguir"},vc:"var(--amber)",
+    w:{en:"Jordan have no points yet, so only a win keeps them in the running. Even then, they would need other results in Matchday 3 to fall their way.",es:"Jordania todav\u00eda no suma puntos, as\u00ed que solo una victoria les mantiene con opciones. Aun ganando, necesitar\u00edan que otros resultados de la jornada 3 les favorezcan."}},
+   {f:"DZA",n:"Algeria",v:{en:"Win to set up a fight for 2nd",es:"Ganar para pelear por el 2.\u00b0"},vc:"var(--green)",
+    w:{en:"A win moves Algeria to 3 points and into a direct race with Austria for second place. A draw would keep both alive but leave Austria in the stronger position.",es:"Una victoria lleva a Argelia a 3 puntos y a una pelea directa con Austria por el segundo puesto. Un empate dejar\u00eda a ambas con vida, pero a Austria en mejor posici\u00f3n."}},
   ],
-  ctx:{en:"Argentina are safe and irrelevant to this. It\u2019s all about 2nd place. Austria (3 pts) currently hold it, but whoever wins tonight pulls level and forces a proper three-way Matchday 3.",es:"Argentina est\u00e1 clasificada y es irrelevante para esto. Todo gira en torno al 2.\u00b0 puesto. Austria (3 pts) lo ocupa ahora, pero quien gane esta noche iguala y fuerza una jornada 3 a tres bandas."},
+  ctx:{en:"Argentina have already qualified, so this match is about second place. Austria hold it for now with 3 points. Whoever wins tonight draws level with them and sets up a three-way contest on the final matchday.",es:"Argentina ya est\u00e1 clasificada, as\u00ed que este partido define el segundo puesto. Austria lo ocupa por ahora con 3 puntos. Quien gane esta noche lo iguala y deja una pelea a tres en la \u00faltima jornada."},
   mini:[{f:"\u{1F1E6}\u{1F1F7}",n:"Argentina",pts:6,pc:"var(--green)",hl:false},{f:"\u{1F1E6}\u{1F1F9}",n:"Austria",pts:3,pc:"var(--fg)",hl:false},{f:"\u{1F1EF}\u{1F1F4}",n:"Jordan",pts:0,pc:"var(--fg-3)",hl:true},{f:"\u{1F1E9}\u{1F1FF}",n:"Algeria",pts:0,pc:"var(--fg-3)",hl:true}],
  },
 ];
@@ -628,7 +617,7 @@ const T={
   brand:"2026 World Cup Guide",
   tabs:["Today","Schedule","Standings","Bracket","More"],
   today_ey:"Monday, June 22 \u2014 Groups I & J",
-  cl_t:"France 1\u20130 Iraq \u00b7 Result",
+  cl_t:"Where the day stands",
   cl_b:"France go top of Group I on 6 pts. Iraq are out. Norway vs Senegal (8 PM) and Jordan vs Algeria (11 PM) still to play.",
   pill_result:"Result",pill_next:"Next",pill_elim:"Must win",pill_sudden:"Sudden death",
   needs:"What\u2019s at stake",means:"What this means",
@@ -653,7 +642,7 @@ const T={
   q_how:"How the tournament works",
   a_how:"<strong>Group stage (now):</strong> 48 teams play in 12 groups of 4. Each team plays 3 games. The top 2 from each group advance \u2014 plus the 8 best third-placed teams, giving <strong>32 teams</strong> in the knockout rounds.<br><br><strong>Knockout rounds (from Jul 2):</strong> A single loss means elimination, a win means advancing through the Round of 32, Round of 16, Quarter-finals, Semi-finals, and the <strong>Final on July 19</strong>.",
   q_prob:"Win probabilities explained",
-  a_prob:"The percentages next to upcoming matches come from sports data models \u2014 squad strength, recent form, head-to-head history. France at 82% means they\u2019re strong favorites, not a guarantee. Upsets happen.",
+  a_prob:"The percentages on upcoming matches come from sports data models that weigh squad strength, recent form, and past meetings between the two teams. A higher number means a team is more likely to win based on that data.",
   q_gd:"What is goal difference?",
   a_gd:"When two teams finish level on points in a group, <strong>goal difference</strong> is the first tiebreaker \u2014 goals scored minus goals conceded across all group games. That\u2019s why you\u2019ll sometimes see a team chasing extra goals when the result is already settled.",
   q_update:"When does this update?",
@@ -669,10 +658,10 @@ const T={
   footer:"Updated after every match",
  },
  es:{
-  brand:"2026 World Cup Guide",
+  brand:"Guía del Mundial 2026",
   tabs:["Hoy","Calendario","Clasificaci\u00f3n","Cuadro","M\u00e1s"],
   today_ey:"Lunes, 22 de junio \u2014 Grupos I & J",
-  cl_t:"Francia 1\u20130 Irak \u00b7 Resultado",
+  cl_t:"C\u00f3mo va el d\u00eda",
   cl_b:"Francia lidera el Grupo I con 6 pts. Irak queda eliminado. Noruega vs Senegal (8 PM) y Jordania vs Argelia (11 PM) todav\u00eda se juegan.",
   pill_result:"Resultado",pill_next:"Pr\u00f3ximo",pill_elim:"Obligado a ganar",pill_sudden:"Muerte s\u00fabita",
   needs:"Qu\u00e9 se juega",means:"Qu\u00e9 significa",
@@ -697,7 +686,7 @@ const T={
   q_how:"C\u00f3mo funciona el torneo",
   a_how:"<strong>Fase de grupos (ahora):</strong> 48 equipos en 12 grupos de 4. Cada equipo juega 3 partidos. Los 2 primeros de cada grupo pasan \u2014 m\u00e1s los 8 mejores terceros, dando <strong>32 equipos</strong> en la fase eliminatoria.<br><br><strong>Eliminatorias (desde el 2 Jul):</strong> Una sola derrota significa la eliminaci\u00f3n, una victoria significa avanzar por los dieciseisavos, octavos, cuartos, semifinales y la <strong>Final el 19 de julio</strong>.",
   q_prob:"Las probabilidades de victoria, explicadas",
-  a_prob:"Los porcentajes junto a los partidos pendientes provienen de modelos de datos deportivos \u2014 calidad del equipo, forma reciente, historial directo. Francia al 82% significa que es gran favorita, no una garant\u00eda. Las sorpresas ocurren.",
+  a_prob:"Los porcentajes de los partidos por jugar provienen de modelos de datos deportivos que consideran el nivel del equipo, la forma reciente y los enfrentamientos previos. Un n\u00famero m\u00e1s alto indica que un equipo tiene m\u00e1s probabilidad de ganar seg\u00fan esos datos.",
   q_gd:"\u00bfQu\u00e9 es la diferencia de goles?",
   a_gd:"Cuando dos equipos quedan igualados en puntos en un grupo, la <strong>diferencia de goles</strong> es el primer desempate \u2014 goles marcados menos goles encajados en todos los partidos del grupo. Por eso a veces ver\u00e1s a un equipo buscando m\u00e1s goles cuando el resultado ya est\u00e1 decidido.",
   q_update:"\u00bfCu\u00e1ndo se actualiza?",
@@ -731,25 +720,24 @@ function pill(type){
 
 function probBar(p,hn,an){
  if(!p)return"";
- // Color by rank: favorite (higher of home/away) = green, draw = grey, underdog = red
- const homeIsFav = p.h >= p.a;
- const homeColor = homeIsFav ? "var(--green)" : "var(--red)";
- const awayColor = homeIsFav ? "var(--red)" : "var(--green)";
- const homeTxt = homeIsFav ? "var(--green)" : "var(--red)";
- const awayTxt = homeIsFav ? "var(--red)" : "var(--green)";
+ // Clean text-forward display: three rows, each with a thin neutral bar + percentage.
+ // No green/red, no flag-like segments. The bar length encodes the value.
+ function row(name,pct,strong){
+  return'<div class="pr"><span class="pr-n'+(strong?' pr-fav':'')+'">'+name+'</span>'
+   +'<span class="pr-track"><span class="pr-fill'+(strong?' pr-fill-fav':'')+'" style="width:'+pct+'%"></span></span>'
+   +'<span class="pr-pct'+(strong?' pr-fav':'')+'">'+pct+'%</span></div>';
+ }
+ const homeFav=p.h>=p.a;
  return'<div class="pb-w"><div class="dl">'+t("prob")+'</div>'
-  +'<div class="pb">'
-  +'<div class="ps" style="width:'+p.h+'%;background:'+homeColor+'">'+(p.h>14?p.h+"%":"")+'</div>'
-  +'<div class="ps" style="width:'+p.d+'%;background:var(--fg-3)">'+(p.d>9?p.d+"%":"")+'</div>'
-  +'<div class="ps" style="width:'+p.a+'%;background:'+awayColor+'">'+(p.a>14?p.a+"%":"")+'</div>'
-  +'</div>'
-  +'<div class="pn"><span style="color:'+homeTxt+';font-weight:600">'+hn+' '+p.h+'%</span><span class="pd">'+t("draw")+' '+p.d+'%</span><span style="color:'+awayTxt+';font-weight:600">'+an+' '+p.a+'%</span></div>'
+  +row(hn,p.h,homeFav)
+  +row(t("draw"),p.d,false)
+  +row(an,p.a,!homeFav)
   +'</div>';
 }
 
 function matchCard(m){
  const open=openCards.has(m.id);
- const timeStr=m.done?m.time[lang]+' <b>\u00b7 '+m.score+'</b>':m.time[lang];
+ const timeStr=m.time[lang];
  const stakeLabel=m.done?t("means"):t("needs");
  const stakes=m.stakes.map(s=>
   '<div class="sk">'
@@ -822,21 +810,18 @@ function standingsHTML(){
 }
 
 function statusPillsHTML(){
- function teamPill(team,c){
-  return'<span style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:5px;background:'+c.bg+';border:1px solid '+c.bd+';font-size:12px;font-weight:500;color:'+c.tc+';margin:2px 2px">'+flag(team.f)+' '+team.n[lang]+'</span>';
+ // Clean grouped list — flag + name with a small status dot, no tag backgrounds
+ function teamItem(team,dot){
+  return'<div class="status-team"><span class="status-dot" style="background:'+dot+'"></span><span class="status-fl">'+flag(team.f)+'</span><span class="status-nm">'+team.n[lang]+'</span></div>';
  }
- const qc={bg:"var(--green-s)",bd:"var(--green-b)",tc:"var(--green)"};
- const ec={bg:"var(--red-s)",bd:"var(--red-b)",tc:"var(--red)"};
- const cc={bg:"var(--card-2)",bd:"var(--border)",tc:"var(--fg-2)"};
- const groups=t("st_group_note");
- return'<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px;box-shadow:var(--sh-sm)">'
-  +'<p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin-bottom:4px">'+t("st_qualified")+'</p>'
-  +'<div style="display:flex;flex-wrap:wrap;margin-bottom:12px">'+STATUS.qualified.map(t=>teamPill(t,qc)).join("")+'</div>'
-  +'<p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin-bottom:4px">'+t("st_eliminated")+'</p>'
-  +'<div style="display:flex;flex-wrap:wrap;margin-bottom:12px">'+STATUS.eliminated.map(t=>teamPill(t,ec)).join("")+'</div>'
-  +'<p style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin-bottom:4px">'+t("st_contention")+'</p>'
-  +'<div style="display:flex;flex-wrap:wrap;margin-bottom:8px">'+STATUS.contention.map(t=>teamPill(t,cc)).join("")+'</div>'
-  +'<p style="font-size:12px;color:var(--fg-3);margin-top:6px">'+groups+'</p>'
+ function section(label,teams,dot){
+  return'<div class="status-section"><div class="status-label">'+label+' <span class="status-count">'+teams.length+'</span></div><div class="status-grid">'+teams.map(tm=>teamItem(tm,dot)).join("")+'</div></div>';
+ }
+ return'<div class="status-card">'
+  +section(t("st_qualified"),STATUS.qualified,"var(--green)")
+  +section(t("st_eliminated"),STATUS.eliminated,"var(--red)")
+  +section(t("st_contention"),STATUS.contention,"var(--fg-3)")
+  +'<p class="status-note">'+t("st_group_note")+'</p>'
   +'</div>';
 }
 function bracketHTML(){
@@ -935,22 +920,7 @@ function startConfetti(c1,c2){
  (function draw(){ctx.clearRect(0,0,cv.width,cv.height);confettiPieces.forEach(p=>{p.y+=p.spd;p.x+=p.wob;p.rot+=2;if(p.y>cv.height){p.y=-20;p.x=Math.random()*cv.width;}ctx.save();ctx.globalAlpha=p.op;ctx.translate(p.x+p.w/2,p.y+p.h/2);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});confettiAnim=requestAnimationFrame(draw);})();
 }
 function stopConfetti(){if(confettiAnim)cancelAnimationFrame(confettiAnim);document.getElementById("confetti-canvas").getContext("2d").clearRect(0,0,window.innerWidth,window.innerHeight);}
-function toggleTheme(){
-  const isDark=document.documentElement.classList.toggle("dark");
-  document.getElementById("theme-icon").innerHTML=isDark?"&#9728;":"&#9790;";
-  try{localStorage.setItem("wc26-theme",isDark?"dark":"light");}catch(e){}
-}
-function initTheme(){
-  try{
-    const saved=localStorage.getItem("wc26-theme");
-    if(saved==="dark"){
-      document.documentElement.classList.add("dark");
-      const icon=document.getElementById("theme-icon");
-      if(icon)icon.innerHTML="&#9728;";
-    }
-  }catch(e){}
-}
-window.addEventListener("DOMContentLoaded",()=>{initTheme();render();});
+window.addEventListener("DOMContentLoaded",render);
 </script>
 <div class="app">
 
@@ -960,14 +930,9 @@ window.addEventListener("DOMContentLoaded",()=>{initTheme();render();});
    <div class="brand-ico"><img src="icon.png" alt="" onerror="this.style.display='none'"></div>
    <span class="brand-name" id="bn"></span>
   </div>
-  <div style="display:flex;align-items:center;gap:8px">
-   <button class="theme-btn" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
-    <span id="theme-icon">&#9790;</span>
-   </button>
-   <div class="lang-tog" role="group" aria-label="Language">
-    <button class="lb on" data-lang="en" onclick="setLang('en')">EN</button>
-    <button class="lb" data-lang="es" onclick="setLang('es')">ES</button>
-   </div>
+  <div class="lang-tog" role="group" aria-label="Language">
+   <button class="lb on" data-lang="en" onclick="setLang('en')">EN</button>
+   <button class="lb" data-lang="es" onclick="setLang('es')">ES</button>
   </div>
  </div>
 </header>
