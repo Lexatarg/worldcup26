@@ -465,9 +465,21 @@ const CFG={
   updated:{en:"Updated Jun 23 \u00b7 evening",es:"Actualizado 23 jun \u00b7 noche"},
   tournamentOver:false,
   winner:null
-  // To activate celebration after the final, set:
-  // tournamentOver: true,
-  // winner: { name:"Argentina", nameEs:"Argentina", flag:"\u{1F1E6}\u{1F1F7}", color1:"#74acdf", color2:"#f6f6f6" }
+  /* ----------------------------------------------------------------
+     CELEBRATION PAGE (turn on after the final)
+     When a champion is crowned, set tournamentOver to true and fill in
+     the winner block. This shows a full-screen celebration: spinning
+     trophy, winner flag, team colors, and confetti. Leave as-is until then.
+
+       tournamentOver: true,
+       winner: {
+         name:   "Argentina",        // English name
+         nameEs: "Argentina",        // Spanish name (RAE)
+         flag:   "\u{1F1E6}\u{1F1F7}",   // flag emoji
+         color1: "#74acdf",          // primary team color
+         color2: "#f6f6f6"           // secondary team color
+       }
+     ---------------------------------------------------------------- */
 };
 
 const F={ARG:"\u{1F1E6}\u{1F1F7}",AUT:"\u{1F1E6}\u{1F1F9}",FRA:"\u{1F1EB}\u{1F1F7}",IRQ:"\u{1F1EE}\u{1F1F6}",NOR:"\u{1F1F3}\u{1F1F4}",SEN:"\u{1F1F8}\u{1F1F3}",JOR:"\u{1F1EF}\u{1F1F4}",DZA:"\u{1F1E9}\u{1F1FF}",MEX:"\u{1F1F2}\u{1F1FD}",KOR:"\u{1F1F0}\u{1F1F7}",CZE:"\u{1F1E8}\u{1F1FF}",RSA:"\u{1F1FF}\u{1F1E6}",CAN:"\u{1F1E8}\u{1F1E6}",SUI:"\u{1F1E8}\u{1F1ED}",BIH:"\u{1F1E7}\u{1F1E6}",QAT:"\u{1F1F6}\u{1F1E6}",BRA:"\u{1F1E7}\u{1F1F7}",MAR:"\u{1F1F2}\u{1F1E6}",SCO:"\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E006F}\u{E007F}",HTI:"\u{1F1ED}\u{1F1F9}",USA:"\u{1F1FA}\u{1F1F8}",AUS:"\u{1F1E6}\u{1F1FA}",PAR:"\u{1F1F5}\u{1F1FE}",TUR:"\u{1F1F9}\u{1F1F7}",GER:"\u{1F1E9}\u{1F1EA}",CIV:"\u{1F1E8}\u{1F1EE}",ECU:"\u{1F1EA}\u{1F1E8}",CUW:"\u{1F1E8}\u{1F1FC}",NED:"\u{1F1F3}\u{1F1F1}",JPN:"\u{1F1EF}\u{1F1F5}",SWE:"\u{1F1F8}\u{1F1EA}",TUN:"\u{1F1F9}\u{1F1F3}",EGY:"\u{1F1EA}\u{1F1EC}",IRN:"\u{1F1EE}\u{1F1F7}",BEL:"\u{1F1E7}\u{1F1EA}",NZL:"\u{1F1F3}\u{1F1FF}",ESP:"\u{1F1EA}\u{1F1F8}",URU:"\u{1F1FA}\u{1F1FE}",CPV:"\u{1F1E8}\u{1F1FB}",KSA:"\u{1F1F8}\u{1F1E6}",COL:"\u{1F1E8}\u{1F1F4}",COD:"\u{1F1E8}\u{1F1E9}",POR:"\u{1F1F5}\u{1F1F9}",UZB:"\u{1F1FA}\u{1F1FF}",ENG:"\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}",GHA:"\u{1F1EC}\u{1F1ED}",PAN:"\u{1F1F5}\u{1F1E6}",CRO:"\u{1F1ED}\u{1F1F7}"};
