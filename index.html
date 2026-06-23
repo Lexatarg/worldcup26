@@ -542,9 +542,9 @@ const MATCHES=[
   time:{en:"1:00 PM EDT",es:"1:00 PM EDT"},
   sum:{en:"Portugal win comfortably and move to the top of Group K.",es:"Portugal gana con holgura y se coloca al frente del Grupo K."},
   stakes:[
-   {n:"Portugal",inMatch:true,v:{en:"Top of the group",es:"L\u00edder del grupo"},vc:"var(--green)",
+   {n:"Portugal",inMatch:true,v:{en:"Top of the group",es:"L\u00edder del grupo"},vc:"var(--fg)",
     w:{en:"A second-match win lifts Portugal to 4 points and first place in Group K, with a strong goal difference. They are well placed to reach the knockout rounds.",es:"Una victoria en la segunda jornada lleva a Portugal a 4 puntos y al primer puesto del Grupo K, con una buena diferencia de goles. Est\u00e1n bien situados para alcanzar la fase eliminatoria."}},
-   {n:"Uzbekistan",inMatch:true,v:{en:"Out of contention",es:"Sin opciones"},vc:"var(--red)",
+   {n:"Uzbekistan",inMatch:true,v:{en:"Out of contention",es:"Sin opciones"},vc:"var(--fg)",
     w:{en:"A second loss leaves Uzbekistan on zero points. With the other teams ahead, they can no longer reach the top two of the group.",es:"Una segunda derrota deja a Uzbekist\u00e1n sin puntos. Con el resto por delante, ya no pueden alcanzar los dos primeros puestos del grupo."}},
   ],
   ctx:{en:"Colombia and Congo DR meet later tonight. That result decides who joins Portugal near the top of Group K.",es:"Colombia y R.\u00a0D. del Congo se enfrentan esta noche. Ese resultado define qui\u00e9n acompa\u00f1a a Portugal en lo alto del Grupo K."},
@@ -555,9 +555,9 @@ const MATCHES=[
   time:{en:"4:00 PM EDT",es:"4:00 PM EDT"},
   sum:{en:"England and Ghana drew 0\u20130 and both remain at the top of Group L on 4 points.",es:"Inglaterra y Ghana empataron 0\u20130 y ambos siguen en lo alto del Grupo L con 4 puntos."},
   stakes:[
-   {n:"England",inMatch:true,v:{en:"Still in control",es:"A\u00fan en control"},vc:"var(--green)",
+   {n:"England",inMatch:true,v:{en:"Still in control",es:"A\u00fan en control"},vc:"var(--fg)",
     w:{en:"England drew but stay top of Group L on 4 points alongside Ghana. A win or draw against Panama in the final matchday is enough to advance.",es:"Inglaterra empat\u00f3 pero sigue liderando el Grupo L con 4 puntos junto a Ghana. Ganar o empatar contra Panam\u00e1 en la \u00faltima jornada es suficiente para avanzar."}},
-   {n:"Ghana",inMatch:true,v:{en:"Still in control",es:"A\u00fan en control"},vc:"var(--green)",
+   {n:"Ghana",inMatch:true,v:{en:"Still in control",es:"A\u00fan en control"},vc:"var(--fg)",
     w:{en:"Ghana drew and share first place with England on 4 points. They face Croatia in the final matchday. A win or draw should be enough to advance.",es:"Ghana empat\u00f3 y comparte el primer puesto con Inglaterra con 4 puntos. Se enfrenta a Croacia en la \u00faltima jornada. Ganar o empatar deber\u00eda ser suficiente para avanzar."}},
   ],
   ctx:{en:"Panama vs Croatia is next. The loser faces a very difficult path to advance, and if both England and Ghana win their final match, Panama and Croatia are both out regardless.",es:"Panam\u00e1 vs Croacia es el siguiente. Al que pierda le quedar\u00e1 un camino muy dif\u00edcil para avanzar, y si Inglaterra y Ghana ganan su \u00faltimo partido, Panam\u00e1 y Croacia quedan eliminados de todos modos."},
@@ -568,7 +568,7 @@ const MATCHES=[
   time:{en:"7:00 PM EDT",es:"7:00 PM EDT"},
   sum:{en:"Both are on zero points after two matches with England and Ghana at 4. The loser faces a near-impossible path to advance.",es:"Ambos est\u00e1n a cero puntos con Inglaterra y Ghana en 4. Al que pierda le quedar\u00e1 un camino casi imposible para avanzar."},
   stakes:[
-   {n:"Panama",inMatch:true,v:{en:"Must win to have any chance",es:"Obligados a ganar para tener opciones"},vc:"var(--red)",
+   {n:"Panama",inMatch:true,v:{en:"Must win to have any chance",es:"Obligados a ganar para tener opciones"},vc:"var(--fg)",
     w:{en:"Panama have lost both matches so far. Only a win here keeps any realistic hope alive going into the final matchday.",es:"Panam\u00e1 ha perdido sus dos partidos. Solo una victoria aqu\u00ed mantiene viva alguna esperanza realista antes de la \u00faltima jornada."}},
    {n:"Croatia",inMatch:true,v:{en:"Win to keep hope alive",es:"Ganar para mantener la esperanza"},vc:"var(--fg)",
     w:{en:"Croatia also lost their opener. The model favors them here, but they need three points to have any chance of advancing on the final matchday.",es:"Croacia tambi\u00e9n perdi\u00f3 su debut. El modelo les favorece, pero necesitan tres puntos para tener alguna posibilidad en la \u00faltima jornada."}},
@@ -899,7 +899,7 @@ window.addEventListener("DOMContentLoaded",render);
 <header class="hdr">
  <div class="w">
   <div class="brand">
-   <div class="brand-ico"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYCAYAAABxlTA0AAAchklEQVR42u2ceZReZZXuf/t9z/BNNQ9JKiOV0YQkkEASJhNBEEVsBkGhGxS7kaWoPXlvN6Ji22o7dPe9bdvaODV4G0VkcmIUG4RAQhJCSDrzAEkqlapKTV/VN5zpfe8f54uEXO+0rEDsrmetus87zz777LP3OmfjQFvqGoFf0Ai0BfQvaDLbLgVoC+i2KPhFjUBbQP+iprPtYtoC+tc2D7+GcWgL6F/DPP8arnXQFtC/hqn+NVxoW0D/GuZ5WwD8Iu6yLaB/Ndvyr+kq2wL6VzPVv44LbQvoX8c8/2qusi2gAfxqZvtXcKFtAf0rmORf0yW2BfSvabZ/BdfaFtC/gkn+NV1iW0D/mmb7V3CtbQH9K5jkX9Ml/g8B/WsairZr/SWMQFtA/xJmse0amkegLaCbh6KN+CWMQFtA/xJmse0amkegLaCbh6KN+CWMQFtA/xJm8ae4hl+Ij7aA/oVMZNtlJCPQFtDJOLSVv5ARaAvo/+NEeu9NLoQJjpC+6aabeh133HEbr7DCCvsst9xyew8cOFB4L+Hll19+n9NPP33Lxx57bBhtOxDa5kAD+BNB22D+FwP52WefZTbZZJOua6yxxnL9+/dfdfvttz+4V69eF/fu3XskA3d0KpWaZ2bzDz744EmXXHLJS2PGjLlr3Lhxd3/zzTfC9wh//fXXd5199tnP/OY3v/mEtjPS6fR8BvpnXbp0uZ3wj3XXXXePHj16DB86dOiyK664YmcGfPq/6OKv3rQtoP+HEPj2229LGVxbLrPMMsduvPHGN33wwQePUvbKpEmTXnvyySevnzp16jHffffdLgzWwblcroLuSghh1Sb+T1k2qWw2W866K86aNWs/wilvvfXWvTNnznxj8uTJL7CdhxjkN/Tr1++oIUOGjHj//ffbgvs/jSh1bQHNQSjOZ565ttt2251+/3d8/WrXbHn5n4/PvXw7wN/e+//T8e6Pjx48fzF3sSNJqMw58tHX1yLXbk6hd8zNDj5M/nt5n1yTFJNqJMH+3MYqxl1AMf9aqtBZ0m0X7xsVi8+JFqbOGpqlBWlOHKBiVpgwbwxDyFZjFxWAbS2cWgJGBpkACVgH6JAABAS8ACGQrWS1wJEY0bGZbBxBIIHxARGlLkBp7UjhTibr1r7SqvkH+47FY5Bn+MJN1gWbj/l7bq7uv0TlvbhJ4FiPFtHZWoC1jICBQDCBJjFIkDqABLYCyHJQCFYCAMGw0BFnKkRKSCJnChKwBAAAACw==" alt="" onerror="this.style.display='none'"></div>
+   <div class="brand-ico"><img src="icon.png" alt="" onerror="this.style.display='none'"></div>
    <span class="brand-name" id="bn"></span>
   </div>
   <div class="lang-tog" role="group" aria-label="Language">
