@@ -20,7 +20,7 @@ Updated after each match. Reload the page once a game ends for the latest.
 
 ## How it was built
 
-Claude helped me write most of the code, as well as the integration of the interface and design system — but the real point of the project was interpretation: turning raw results, standings, and probabilities into plain-language explanations of what each match means and what's at stake, in both US English and Latin American Spanish. A 48-team World Cup throws off a lot of numbers, and the goal was to give users that use this page the context behind them, not just the scores.
+Claude helped me write most of the code, as well as the integration of the interface and design system — but the real point of the project was interpretation: turning raw results, standings, and probabilities into plain-language explanations of what each match means and what's at stake, in both US English and Latin American Spanish. A 48-team World Cup throws out a lot of numbers, and the goal was to give users of this page the context behind them, not just the scores.
 
 I chose to update the data manually after each match, instead of scraping it live. Although, not the cleanest or quickest approach, it kept the project fairly simple and mostly free to run, with the data intepretation by Claude being the biggest cost. This is a personal project for following the World Cup with family and friends, so I never worries about scalability.
 
