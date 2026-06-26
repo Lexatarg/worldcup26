@@ -1,41 +1,43 @@
 # 2026 World Cup Guide
 
-A bilingual web page that shows what's at stake in every match of the 2026 FIFA World Cup. Results, group standings, win probabilities, and knockout bracket, from group stages to the final.
-
-It works on a phone or a laptop, switches between US English and Latin American Spanish, and can be added to a home screen for an app-like experience.
+A bilingual web page that shows what's at stake in every match of the 2026 FIFA World Cup. Results, group standings, win probabilities, and the knockout bracket, from the group stage to the final.
 
 ## Why it exists
 
-I built this to keep my family and friends up-to-date during the World Cup, and to show them what to watch and why. A 48-team tournament is hard to follow: twelve groups, three rounds of group games, and a result in one group can change who advances from another. A score on its own leaves out the context. Portugal beating Uzbekistan 5–0 also put Portugal top of their group and knocked Uzbekistan out, but the score alone doesn't say that. This page helps puts it all into prespective, and it's impact on the rest of the tournament.
+I built this to keep my family and friends up to date during the World Cup, and to show them what to watch and why. The 2026 World Cup is the largest yet — 48 teams in twelve groups of four, each playing three group games — and that makes it hard to follow. The top two from every group advance, along with the eight best third-placed teams, and those third-placed teams are ranked against each other across all twelve groups. So a result in one group can change who advances from another, and a team can still go through after finishing third in its group. Context is very important, and I wanted to highlight that and make it easy to understand. This page puts each result in perspective and shows its impact on the rest of the tournament.
 
 ## Tabs
 
-- **Today** — the day's matches, each with what's at stake and what the two teams are playing for, win probabilities, and the relevant group table, all updated after every match.
-- **Schedule** — every match by day, with results added after every match, and win probabilities for upcoming matches.
-- **Standings** — all twelve groups, with info on who's advancing, in contention, and in danger.
+- **Today** — the day's matches, each with what the two teams are playing for, win probabilities, and the relevant group table, all updated after every match.
+- **Schedule** — every match by day, with results added as they finish and win probabilities for upcoming matches.
+- **Standings** — all twelve groups, showing who's advancing, in contention, and in danger.
 - **Bracket** — qualified, eliminated, and still-in-contention teams, plus the knockout rounds.
-- **More** — what this is, how the tournament works, web page update schedule, help with adding to home screens, and more.
+- **More** — what this is, how the tournament works, the update schedule, help with adding it to a home screen, and more.
 
 ## Updates
 
-I update it by hand after each match. Reload the page once a game ends for the latest.
+Updated after each match. Reload the page once a game ends for the latest.
 
 ## How it was built
 
-Claude helped me create the UI/UX using skills from shadcn and cal.com (coss). It also wrote most of the code, the bilingual copy with localizations and correct transliteration terminology based on my input, and how the data was intepreted and presented to the static web page. I chose to manually update everything after each match to avoid any unnecessary costs and complexities. As mentioned above, this was more to experiment with skills, and github pages to help myself and other's better understand and follow the World Cup, rather than optomizing and automating. A fun little vibe-coded web page for following the World Cup with family and friends.
+Claude helped me write most of the code, as well as the integration of the interface and design system — but the real point of the project was interpretation: turning raw results, standings, and probabilities into plain-language explanations of what each match means and what's at stake, in both US English and Latin American Spanish. A 48-team World Cup throws off a lot of numbers, and the goal was to give users that use this page the context behind them, not just the scores.
+
+I chose to update the data manually after each match, instead of scraping it live. Although, not the cleanest or quickest approach, it kept the project fairly simple and mostly free to run, with the data intepretation by Claude being the biggest cost. This is a personal project for following the World Cup with family and friends, so I never worries about scalability.
 
 The Claude skills used:
+
 - **frontend-design** — the interface and design-system styling.
 - **shadcn/ui blocks** — component patterns for the layout.
 - **cal.com (coss) UI** — the overall look and design language.
-- **humanizer** — applied to the English and Spanish copy to keep it natural.
+- **humanizer** — used to intepret the output for US English and Latin American Spanish (with correct, RAE-compliant terminology based on my input) to keep it natural and easy to understand.
 
 ## Technical notes
 
 - One self-contained `index.html`: HTML, CSS, and vanilla JavaScript. No build step, no framework, no backend.
-- Match data lives in JavaScript objects near the top of the file and is edited by hand.
-- Bilingual through a translation object; the language toggle needs no reload.
+- Match data lives in JavaScript objects near the top of the file and is edited after each match.
+- Bilingual through a single translation object; the language toggle needs no reload.
 - Installable to a home screen via a web app manifest and icon set.
+- Privacy-friendly analytics through GoatCounter — no cookies, no personal data.
 - `noindex` tags and a `robots.txt` keep the page out of search results.
 - Hosted free on GitHub Pages.
 
